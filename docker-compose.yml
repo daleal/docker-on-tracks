@@ -1,0 +1,21 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    volumes:
+      - ~/docker/volumes/postgres:/var/lib/postgresql/data
+    networks:
+      - backend
+  apache:
+    build: .
+    # Mount a volume for the data
+    volumes:
+    - .:/var/www/html
+    ports:
+    - "3000:80"
+    networks:
+      - backend
+
+# Networks for container communication
+networks:
+  backend:
